@@ -1,4 +1,4 @@
-import { drawGrain, drawScanlines, drawVignette, drawLightLeak } from './effects.js';
+import { drawGrain, drawScanlines, drawVignette, drawLightLeak, drawLetterbox, drawTapeEdge } from './effects.js';
 
 const layouts = {
   1: [[ [0.04, 0.20], [0.96, 0.16], [0.94, 0.78], [0.06, 0.76] ]],
@@ -219,5 +219,7 @@ export function render(canvas, state) {
   drawGrain(context, width, height, state.grain ?? 1);
   drawScanlines(context, width, height, state.scanlines ?? 1, "#fff");
   drawLightLeak(context, width, height, state.lightLeak ?? 0, "#ffb476");
+  drawLetterbox(context, width, height, 0.015);
+  drawTapeEdge(context, width, height, width * 0.02);
 }
 

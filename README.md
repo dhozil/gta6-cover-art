@@ -18,13 +18,15 @@ Then open http://localhost:8080. The first visit loads two bundled sample scenes
 
 Neon County composes a poster from up to four hard-cut scenes. Drag inside the preview to pan, use the zoom slider or scroll wheel to zoom, and choose Fit / fill to switch the crop. Reorder scenes with the arrow buttons, remove them with ×, or add a scene. Caption, strapline, colour grade, and framing update the live canvas as you work.
 
+Fine deterministic grain and a subtle sprocket-hole tape edge finish the cover.
+
 ## Export sizes
 
 Choose square (1080 × 1080), portrait (1080 × 1350), or landscape (1920 × 1080), then select Export PNG. The downloaded file is named for its dimensions, and a copy of the exported image appears in the editor.
 
 ## Keyboard shortcuts
 
-There are no custom shortcuts. Use Tab and Shift+Tab to move between controls, Enter or Space to activate buttons, and the arrow keys to adjust Zoom. The mouse wheel over the preview also zooms the selected scene.
+Press 1 for square (1080 × 1080), 2 for portrait (1080 × 1350), or 3 for landscape (1920 × 1080). Press E to open the exported PNG in a new tab for dragging out. Press S to cycle sunset, neon, and gold colour treatments. Use Tab and Shift+Tab to move between controls, Enter or Space to activate buttons, and the arrow keys to adjust Zoom. The mouse wheel over the preview also zooms the selected scene.
 
 ## Privacy
 

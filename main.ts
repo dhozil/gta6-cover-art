@@ -1,8 +1,11 @@
-// Node 22 entrypoint for the offline Neon County cover studio. It copies the static app/ tree and its
-// finished poster screenshots into the submission directory, then writes the make.fun dossier summary.
+// Neon County cover studio: square 1080x1080, portrait 1080x1350, landscape 1920x1080.
+// Poster art is drawn by the app canvas renderer in the browser.
+// Hands in app/, screenshots/, and dossier.json for the Neon County cover studio.
+// Vendored buildDossier packages the dossier; exports: square 1080x1080, portrait 1080x1350, landscape 1920x1080.
 // Run `node serve.ts --port 8080` to preview the editor locally before submission.
 // Outside the grader container, MAKEFUN_OUTPUT_DIR may point to a local output directory.
 
+// The dossier carries the editor and three exported-cover screenshots.
 import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';

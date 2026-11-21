@@ -150,6 +150,36 @@ document.querySelectorAll('[data-size]').forEach((button) => {
   };
 });
 
+const shortcuts = { colour: 's', export: 'e' };
+$('#shortcut-hint').textContent = [
+  ...Array.from(document.querySelectorAll('[data-shortcut]'), (button) =>
+    `${button.dataset.shortcut} ${button.textContent.split(' \u00b7 ')[0]}`),
+  `${shortcuts.colour.toUpperCase()} Colour treatment`,
+  `${shortcuts.export.toUpperCase()} PNG in new tab`,
+].join(' \u00b7 ');
+
+document.addEventListener('keydown', (event) => {
+  if (event.ctrlKey || event.metaKey || event.altKey || event.repeat ||
+      event.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+  const key = event.key.toLowerCase();
+  const size = /^[123]$/.test(key) && document.querySelector(`[data-shortcut="${key}"]`);
+  if (size) size.click();
+  else if (key === shortcuts.colour) {
+    const grades = ['sunset', 'neon', 'gold'];
+    $('#grade').value = grades[(grades.indexOf(state.grade) + 1) % grades.length];
+    $('#grade').dispatchEvent(new Event('input'));
+  } else if (key === shortcuts.export) {
+    const tab = window.open('about:blank', '_blank');
+    if (tab) exportCover(false).then((url) => {
+      const image = tab.document.createElement('img');
+      image.src = url;
+      image.style.maxWidth = '100%';
+      tab.document.body.append(image);
+    });
+  } else return;
+  event.preventDefault();
+});
+
 let dragPoint = null;
 canvas.onpointerdown = (event) => {
   const bounds = canvas.getBoundingClientRect();

@@ -240,3 +240,5 @@ body.cover > script {
 .effects label { margin: 12px 0; }
 .effects input { margin-top: 6px; }
 .effects p { font-size: 11px; }
+
+.shortcut-hint { margin: 8px 0; color: #b5afc1; font-size: 10px; text-transform: uppercase; letter-spacing: .12em; text-align: center; }
