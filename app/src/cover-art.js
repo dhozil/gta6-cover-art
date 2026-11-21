@@ -1,3 +1,5 @@
+import { drawGrain, drawScanlines, drawVignette, drawLightLeak } from './effects.js';
+
 const layouts = {
   1: [[ [0.04, 0.20], [0.96, 0.16], [0.94, 0.78], [0.06, 0.76] ]],
   2: [
@@ -192,48 +194,11 @@ export function drawMasthead(context, width, height, strap) {
   context.restore();
 }
 
-export function drawVignette(context, width, height) {
-  const vignette = context.createRadialGradient(
-    width / 2, height * 0.46, width * 0.22, width / 2, height * 0.46, width * 0.78,
-  );
-  vignette.addColorStop(0.55, '#090a1900');
-  vignette.addColorStop(1, '#080917bb');
-  context.fillStyle = vignette;
-  context.fillRect(0, 0, width, height);
-
-  context.save();
-  context.strokeStyle = '#ffdfbd77';
-  context.lineWidth = width * 0.004;
-  context.strokeRect(width * 0.025, height * 0.018, width * 0.95, height * 0.964);
-  context.fillStyle = '#ffd9b8';
-  context.font = `bold ${width * 0.009}px Arial`;
-  context.fillText('◆  NC / ORIGINAL SERIES', width * 0.065, height * 0.955);
-  context.restore();
-}
-
-export function drawGrain(context, width, height) {
-  context.save();
-  context.globalAlpha = 0.09;
-  for (let y = 0; y < height; y += 12) {
-    for (let x = 0; x < width; x += 12) {
-      const noise = ((x * 17 + y * 31) % 101) / 101;
-      if (noise > 0.52) {
-        context.fillStyle = noise > 0.77 ? '#fff' : '#100c23';
-        context.fillRect(x, y, 2 + noise * 3, 2 + noise * 3);
-      }
-    }
-  }
-  context.globalAlpha = 0.08;
-  context.fillStyle = '#fff';
-  for (let y = 0; y < height; y += 7) context.fillRect(0, y, width, 1);
-  context.restore();
-}
-
 export function render(canvas, state) {
   const { width, height } = state;
   canvas.width = width;
   canvas.height = height;
-  const context = canvas.getContext('2d');
+  const context = canvas.getContext('2d', { willReadFrequently: true });
   drawGradientSky(context, width, height, state.grade);
   drawSilhouetteSkyline(context, width, height);
   const panelPolygons = regions(state.panels.length);
@@ -242,6 +207,17 @@ export function render(canvas, state) {
   });
   drawMasthead(context, width, height, state.strap);
   drawCaption(context, state.caption, width, height);
-  drawVignette(context, width, height);
-  drawGrain(context, width, height);
+  drawVignette(context, width, height, state.vignette ?? 1);
+  context.save();
+  context.strokeStyle = '#ffdfbd77';
+  context.lineWidth = width * 0.004;
+  context.strokeRect(width * 0.025, height * 0.018, width * 0.95, height * 0.964);
+  context.fillStyle = '#ffd9b8';
+  context.font = `bold ${width * 0.009}px Arial`;
+  context.fillText('◆  NC / ORIGINAL SERIES', width * 0.065, height * 0.955);
+  context.restore();
+  drawGrain(context, width, height, state.grain ?? 1);
+  drawScanlines(context, width, height, state.scanlines ?? 1, "#fff");
+  drawLightLeak(context, width, height, state.lightLeak ?? 0, "#ffb476");
 }
+

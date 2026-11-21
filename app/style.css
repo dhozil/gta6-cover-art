@@ -235,3 +235,8 @@ body.cover > script {
     display: none;
   }
 }
+
+.effects h3 { margin-top: 22px; }
+.effects label { margin: 12px 0; }
+.effects input { margin-top: 6px; }
+.effects p { font-size: 11px; }

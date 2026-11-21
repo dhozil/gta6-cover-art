@@ -8,6 +8,10 @@ const state = {
   caption: $('#caption').value,
   strap: $('#strap').value,
   grade: 'sunset',
+  grain: 1,
+  scanlines: 1,
+  vignette: 1,
+  lightLeak: 0,
   panels: [],
   selected: 0,
 };
@@ -212,6 +216,14 @@ async function exportCover(download = true) {
 
 $('#export').onclick = () => exportCover();
 window.coverStudio = { state, draw: drawPoster, exportCover };
+
+
+for (const field of ["grain", "scanlines", "vignette"]) {
+  document.getElementById(field).oninput = (event) => {
+    state[field] = Number(event.target.value);
+    drawPoster();
+  };
+}
 
 const query = new URLSearchParams(location.search);
 if (query.has('size')) {
