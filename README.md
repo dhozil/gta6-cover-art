@@ -19,6 +19,7 @@ Then open http://localhost:8080. The first visit loads two bundled sample scenes
 Neon County composes a poster from up to four hard-cut scenes. Drag inside the preview to pan, use the zoom slider or scroll wheel to zoom, and choose Fit / fill to switch the crop. Reorder scenes with the arrow buttons, remove them with ×, or add a scene. Caption, strapline, colour grade, and framing update the live canvas as you work.
 
 Fine deterministic grain and a subtle sprocket-hole tape edge finish the cover.
+- Finer seeded grain and keyboard shortcuts for sizes (1–3), colour (S), and PNG export (E).
 
 ## Export sizes
 

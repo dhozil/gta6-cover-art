@@ -155,7 +155,7 @@ $('#shortcut-hint').textContent = [
   ...Array.from(document.querySelectorAll('[data-shortcut]'), (button) =>
     `${button.dataset.shortcut} ${button.textContent.split(' \u00b7 ')[0]}`),
   `${shortcuts.colour.toUpperCase()} Colour treatment`,
-  `${shortcuts.export.toUpperCase()} PNG in new tab`,
+  `${shortcuts.export.toUpperCase()} Export PNG in new tab`,
 ].join(' \u00b7 ');
 
 document.addEventListener('keydown', (event) => {

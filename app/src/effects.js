@@ -15,6 +15,7 @@ export function drawVignette(context, width, height, strength) {
 
 let grainTile;
 
+// The tile is seeded so every render is identical.
 export function drawGrain(context, width, height, strength) {
   context.save();
   context.globalAlpha = 0.09 * Math.max(0, strength);
@@ -26,7 +27,7 @@ export function drawGrain(context, width, height, strength) {
     let seed = 1977;
     for (let i = 0; i < pixels.data.length; i += 4) {
       seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
-      const value = Math.max(0, Math.min(255, ((seed >>> 24) - 128) * 1.2 + 128));
+      const value = Math.max(0, Math.min(255, ((seed >>> 24) - 128) * 1.25 + 128));
       pixels.data.set([value, value, value, 80], i);
     }
     tile.putImageData(pixels, 0, 0);

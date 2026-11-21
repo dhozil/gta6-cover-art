@@ -181,7 +181,7 @@ export function drawMasthead(context, width, height, strap) {
 
   context.shadowBlur = 0;
   context.font = `700 ${width * 0.014}px Arial`;
-  context.letterSpacing = `${width * 0.004}px`;
+  context.letterSpacing = `${width * 0.004 + 2}px`;
   context.fillStyle = '#ffb4a3';
   context.fillText(String(strap || 'GOOD NIGHTS. BAD DECISIONS.').toUpperCase(), width / 2, height * 0.14);
 
@@ -216,6 +216,7 @@ export function render(canvas, state) {
   context.font = `bold ${width * 0.009}px Arial`;
   context.fillText('◆  NC / ORIGINAL SERIES', width * 0.065, height * 0.955);
   context.restore();
+  // Letterbox and grain are drawn last so every panel keeps its crisp edge.
   drawGrain(context, width, height, state.grain ?? 1);
   drawScanlines(context, width, height, state.scanlines ?? 1, "#fff");
   drawLightLeak(context, width, height, state.lightLeak ?? 0, "#ffb476");
