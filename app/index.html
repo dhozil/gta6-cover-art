@@ -1,23 +1,65 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
-<link rel="stylesheet" href="./style.css">
-</head>
-<body>
-<main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
-  </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
-</main>
-<script type="module" src="./src/main.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neon County — cover studio</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <header>
+      <b>NC<span> / </span>NEON COUNTY</b>
+      <small>THE AFTER-HOURS COVER STUDIO</small>
+      <button id="export">Export PNG ↗</button>
+    </header>
+    <main>
+      <aside>
+        <h2>Your scenes</h2>
+        <p>One night. Every angle.</p>
+        <div id="panels"></div>
+        <button id="add">+ Add panel</button>
+        <label class="upload">Choose your photo<input id="upload" type="file" accept="image/*"></label>
+        <h3>Sample scenes</h3>
+        <button id="pier">Ocean pier</button>
+        <button id="boulevard">Boulevard</button>
+        <h3>Frame the scene</h3>
+        <label>Zoom<input id="zoom" type="range" min="1" max="4" step=".01" value="1"></label>
+        <button id="fit">Fit / fill</button>
+        <p>Drag a scene to reposition.<br>Scroll to zoom. Select a panel first.</p>
+      </aside>
+
+      <section class="stage">
+        <nav aria-label="Export size">
+          <button data-size="1080,1080">Square · 1:1</button>
+          <button data-size="1080,1350">Portrait · 4:5</button>
+          <button data-size="1920,1080">Wide · 16:9</button>
+        </nav>
+        <div class="canvas-wrap"><canvas id="poster"></canvas></div>
+        <footer>
+          <span>● LIVE PREVIEW</span>
+          <span id="dimensions"></span>
+          <span>100% LOCAL / NO UPLOADS</span>
+        </footer>
+      </section>
+
+      <aside>
+        <h2>Make it yours</h2>
+        <p>A postcard from the wild side.</p>
+        <label>Cover headline<textarea id="caption">AFTER HOURS.
+BEFORE SUNRISE.</textarea></label>
+        <label>Strapline<input id="strap" value="GOOD NIGHTS. BAD DECISIONS."></label>
+        <label>Colour treatment
+          <select id="grade">
+            <option value="sunset">Sunset fever</option>
+            <option value="neon">Electric midnight</option>
+            <option value="gold">Golden hour</option>
+          </select>
+        </label>
+        <div class="note">YOUR CITY.<br>YOUR RULES.</div>
+        <p>Original cover art, made with your memories. Save it. Share it. Own the night.</p>
+        <div id="result"></div>
+      </aside>
+    </main>
+    <script type="module" src="./src/app.js"></script>
+  </body>
 </html>
